@@ -1,11 +1,53 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Android Helper!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
 
-  </body>
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/nativize.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/section.css">
+  <link rel="stylesheet" href="assets/css/demo.css">
+  <link rel="stylesheet" href="assets/css/github.css">
+
+  <link rel="import" href="sections/installed-apps.html">
+
+</head>
+<body>
+
+  <nav class="nav js-nav">
+    <header class="nav-header">
+      <h1 class="nav-title">Android <strong>Helper</strong></h1>
+    </header>
+
+    <div class="nav-item u-category-windows">
+      <h5 class="nav-category">
+        Windows
+      </h5>
+      <button type="button" id="button-windows" data-section="windows" class="nav-button">Create and manage <em>windows</em></button>
+      <button type="button" id="button-crash-hang" data-section="crash-hang" class="nav-button">Handling window <em>crashes and hangs</em></button>
+    </div>
+
+    <div class="nav-item u-category-native-ui">
+      <h5 class="nav-category">
+        Installed Apps</h5>
+      <button type="button" id="button-tray" data-section="tray" class="nav-button">List of installed <em>Apps</em></button>
+    </div>
+
+    <footer class="nav-footer">
+      <button type="button" id="button-about" data-modal="about" class="nav-footer-button">About</button>
+      <a class="nav-footer-logo" href="https://github.com" aria-label="Homepage">
+        <svg class="nav-footer-icon"><use xlink:href="assets/img/icons.svg#icon-love"></use></svg>
+      </a>
+    </footer>
+  </nav>
+
+  <main class="content js-content"></main>
+
+  <script>
+    require('./assets/nav')
+  </script>
+</body>
 </html>

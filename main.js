@@ -1,8 +1,8 @@
-const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 const electron = require('electron')
 const app = electron.app
+const BrowserWindow = electron.BrowserWindow
 
 let win
 
