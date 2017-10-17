@@ -1,37 +1,80 @@
 const path = require('path')
-const url = require('url')
+const glob = require('glob')
 const electron = require('electron')
-const app = electron.app
+
 const BrowserWindow = electron.BrowserWindow
+const app = electron.app
 
-let win
+const debug = true
 
-function createWindow () {
-  win = new BrowserWindow({width: 800, height: 600, title: "Android-Helper"})
+if (process.mas) app.setName('Android Helper')
 
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+var mainWindow = null
 
-  win.webContents.openDevTools()
+function initialize () {
+  var shouldQuit = makeSingleInstance()
+  if (shouldQuit) return app.quit()
 
-  win.on('closed', () => {
-    win = null
+  function createWindow () {
+    var windowOptions = {
+      width: 1080,
+      minWidth: 680,
+      height: 840,
+      title: app.getName()
+    }
+
+    mainWindow = new BrowserWindow(windowOptions)
+    mainWindow.loadURL(path.join('file://', __dirname, '/index.html'))
+
+    if (debug) {
+      mainWindow.webContents.openDevTools()
+      mainWindow.maximize()
+      require('devtron').install()
+    }
+
+    mainWindow.on('closed', function () {
+      mainWindow = null
+    })
+  }
+
+  app.on('ready', function () {
+    createWindow()
+  })
+
+  app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
+  })
+
+  app.on('activate', function () {
+    if (mainWindow === null) {
+      createWindow()
+    }
   })
 }
 
-app.on('ready', createWindow)
+function makeSingleInstance () {
+  if (process.mas) return false
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  return app.makeSingleInstance(function () {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore()
+      mainWindow.focus()
+    }
+  })
+}
+
+// Handle Squirrel on Windows startup events
+switch (process.argv[1]) {
+  case '--squirrel-install':
+    break
+  case '--squirrel-uninstall':
+    break
+  case '--squirrel-obsolete':
+  case '--squirrel-updated':
     app.quit()
-  }
-})
-
-app.on('activate', () => {
-  if (win === null) {
-    createWindow()
-  }
-})
+    break
+  default:
+    initialize()
+}

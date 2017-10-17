@@ -16,16 +16,8 @@ function handleSectionTrigger (event) {
   // Highlight clicked button and show view
   event.target.classList.add('is-selected')
 
-  const sectionId = event.target.dataset.section + '-section'
+  const sectionId = event.target.dataset.section + '-sections'
   document.getElementById(sectionId).classList.add('is-shown')
-
-  // Save currently active button in localStorage
-  const buttonId = event.target.getAttribute('id')
-  settings.set('activeSectionButtonId', buttonId)
-}
-
-function activateDefaultSection () {
-  document.getElementById('button-windows').click()
 }
 
 function showMainContent () {
@@ -48,7 +40,7 @@ function hideAllModals () {
 }
 
 function hideAllSectionsAndDeselectButtons () {
-  const sections = document.querySelectorAll('.js-section.is-shown')
+  const sections = document.querySelectorAll('.js-sections.is-shown')
   Array.prototype.forEach.call(sections, function (section) {
     section.classList.remove('is-shown')
   })
@@ -57,19 +49,4 @@ function hideAllSectionsAndDeselectButtons () {
   Array.prototype.forEach.call(buttons, function (button) {
     button.classList.remove('is-selected')
   })
-}
-
-function displayAbout () {
-  document.querySelector('#about-modal').classList.add('is-shown')
-}
-
-// Default to the view that was active the last time the app was open
-const sectionId = settings.get('activeSectionButtonId')
-if (sectionId) {
-  showMainContent()
-  const section = document.getElementById(sectionId)
-  if (section) section.click()
-} else {
-  activateDefaultSection()
-  displayAbout()
 }
