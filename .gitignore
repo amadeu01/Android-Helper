@@ -59,4 +59,8 @@ typings/
 # dotenv environment variables file
 .env
 
-\.idea/
+# WebStorm
+.idea/
+
+package-lock.json
+yarn.lock

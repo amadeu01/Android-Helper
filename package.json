@@ -12,9 +12,9 @@
     "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: Amadeu' --extend-info=assets/mac/info.plist",
     "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico",
     "package:linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out",
-    "package:sign-exe": "signcode './out/Electron API Demos-win32-ia32/Electron API Demos.exe' --cert ~/electron-api-demos.p12 --prompt --name 'Android Helper'",
+    "package:sign-exe": "signcode './out/Android Helper-win32-ia32/Android Helper.exe' --cert ~/android-helper.p12 --prompt --name 'Android Helper'",
     "package:installer": "node ./script/installer.js",
-    "package:sign-installer": "signcode './out/windows-installer/ElectronAPIDemosSetup.exe' --cert ~/electron-api-demos.p12 --prompt --name 'Android-Helper'",
+    "package:sign-installer": "signcode './out/windows-installer/AndroidHelperSetup.exe' --cert ~/android-helper.p12 --prompt --name 'Android-Helper'",
     "package:mas": "./script/mas.sh",
     "windows-store": "node ./script/windows-store.js",
     "release": "node ./script/release.js",
@@ -39,7 +39,6 @@
     "standard": "^8.2.0"
   },
   "dependencies": {
-    "appium-adb": "^3.0.0",
     "electron-settings": "^3.0.7",
     "electron-shortcut-normalizer": "^1.0.0",
     "glob": "^7.1.0",
