@@ -39,6 +39,8 @@
     "standard": "^8.2.0"
   },
   "dependencies": {
+    "adbkit": "^2.11.0",
+    "bluebird": "^3.5.1",
     "electron-settings": "^3.0.7",
     "electron-shortcut-normalizer": "^1.0.0",
     "glob": "^7.1.0",
